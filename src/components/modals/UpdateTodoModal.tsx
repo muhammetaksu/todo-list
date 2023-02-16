@@ -6,39 +6,53 @@ import Keyboard from "@/assets/Keyboard";
 import Pin from "@/assets/Pin";
 import Quote from "@/assets/Quote";
 import { useModalContext, useTodoContext } from "@/context";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sheet from "react-modal-sheet";
 
-const TodoModal = () => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-  const [description, setDesription] = useState<string>("");
+const UpdateTodoModal = () => {
+  const { updateTodoModal, setUpdateTodoModal, selectedTodo, setSelectedTodo } =
+    useModalContext();
+  const { updateTodo } = useTodoContext();
+  const [isChecked, setIsChecked] = useState<boolean>(selectedTodo.pinned);
+  const [description, setDescription] = useState<string>(
+    selectedTodo.description
+  );
   const [focusInput, setFocusInput] = useState(false);
-  const { addTodoModal, setAddTodoModal } = useModalContext();
-  const { saveTodo, todos } = useTodoContext();
+  console.log(selectedTodo);
+
+  useEffect(() => {
+    setIsChecked(selectedTodo.pinned);
+    setDescription(selectedTodo.description);
+  }, [selectedTodo]);
 
   const closeModal = () => {
-    setDesription("");
+    setDescription("");
     setIsChecked(false);
-    setAddTodoModal(false);
+    setUpdateTodoModal(false);
+    setSelectedTodo({});
   };
 
-  const addTodo = () => {
+  const updateCurrentTodo = () => {
     let values = {
-      id: Math.floor(Math.random() * 9999),
-      completed: false,
+      id: selectedTodo.id,
       pinned: isChecked,
       description: description,
     };
 
-    saveTodo(values);
-    setAddTodoModal(false);
-    setDesription("");
+    updateTodo(values);
+    setUpdateTodoModal(false);
+    setDescription("");
     setIsChecked(false);
+    setSelectedTodo({});
   };
 
   return (
     <>
-      <Sheet isOpen={addTodoModal} onClose={closeModal} detent="content-height">
+      <Sheet
+        isOpen={updateTodoModal}
+        onClose={closeModal}
+        detent="content-height"
+      >
         <Sheet.Container style={{ height: "642px" }}>
           {/* <Sheet.Backdrop
             style={{ backgroundColor: "transparent" }}
@@ -51,7 +65,7 @@ const TodoModal = () => {
                 style={{ color: "rgba(255, 121, 100, 1)" }}
                 className="mx-3 h-5 not-italic font-semibold text-lg leading-5 text-center"
               >
-                Add a task
+                Update a task
               </p>
             </div>
             <div onClick={closeModal} className="absolute top-4 right-4">
@@ -66,7 +80,7 @@ const TodoModal = () => {
                   onFocus={() => setFocusInput(true)}
                   onBlur={() => setFocusInput(false)}
                   value={description}
-                  onChange={(e) => setDesription(e.target.value)}
+                  onChange={(e) => setDescription(e.target.value)}
                   placeholder="Task description"
                   type="text"
                   style={{ gap: "17px", border: "1.5px solid #999C9F" }}
@@ -102,14 +116,15 @@ const TodoModal = () => {
                       ? "bg-custom-disable-blue"
                       : "bg-custom-active-blue"
                   } w-full not-italic font-normal text-lg leading-5 text-white h-12 rounded`}
-                  onClick={() => addTodo()}
+                  onClick={() => updateCurrentTodo()}
                 >
                   Save
                 </button>
+
                 <div className="mb-16 mt-8 flex justify-center">
                   <button
                     onClick={closeModal}
-                    className="absolute w-16 h-5 not-italic font-normal text-lg leading-5 text-blue-500"
+                    className="absolute w-16 h-5 not-italic font-normal text-lg leading-5 text-custom-active-blue"
                   >
                     Cancel
                   </button>
@@ -130,4 +145,4 @@ const TodoModal = () => {
   );
 };
 
-export default TodoModal;
+export default UpdateTodoModal;

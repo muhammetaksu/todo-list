@@ -1,11 +1,26 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
 import TodoList from "@/components/todo-list/TodoList";
-import StatusBar from "@/components/StatusBar";
 import Logo from "@/components/Logo";
 import { Inter } from "@next/font/google";
+import dynamic from "next/dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const UpdateTodoModal = dynamic(
+  () => import("../components/modals/UpdateTodoModal"),
+  {
+    ssr: false,
+  }
+);
+const TodoModal = dynamic(() => import("../components/modals/TodoModal"), {
+  ssr: false,
+});
+const TodoMenuModal = dynamic(
+  () => import("../components/modals/TodoMenuModal"),
+  {
+    ssr: false,
+  }
+);
 
 export default function Home() {
   return (
@@ -20,12 +35,15 @@ export default function Home() {
         style={{
           background: "linear-gradient(116.82deg, #85A1BA 0%, #194591 65.92%)",
         }}
-        className={`${styles.container} h-screen max-w-full`}
+        className="h-screen max-w-full"
       >
         {/* <StatusBar /> */}
         <Logo />
         <TodoList />
       </main>
+      <TodoModal />
+      <TodoMenuModal />
+      <UpdateTodoModal />
     </>
   );
 }

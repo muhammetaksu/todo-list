@@ -1,3 +1,4 @@
+import { sortByString } from "@/utils";
 import React, { createContext, useEffect, useState } from "react";
 
 export const TodoContext = createContext();
@@ -11,13 +12,13 @@ export const TodoContextProvider = ({ children }) => {
     if (!myTodos) {
       setTodos([]);
     } else {
-      setTodos(myTodos);
+      setTodos(sortByString(myTodos));
     }
   }, []);
 
   const saveTodo = async (todo) => {
-    setTodos([...todos, todo]);
     localStorage.setItem("todos", JSON.stringify([...todos, todo]));
+    setTodos(sortByString([...todos, todo]));
   };
 
   const completeTodo = async (id) => {
@@ -28,7 +29,7 @@ export const TodoContextProvider = ({ children }) => {
       }
     });
     const otherTodos = await todos.filter((todo) => todo.id !== id);
-    setTodos([...otherTodos, newTodo]);
+    setTodos(sortByString([...otherTodos, newTodo]));
     localStorage.setItem("todos", JSON.stringify([...otherTodos, newTodo]));
   };
 
@@ -40,24 +41,20 @@ export const TodoContextProvider = ({ children }) => {
       }
     });
     const otherTodos = await todos.filter((todo) => todo.id !== id);
-    setTodos([...otherTodos, newTodo]);
     localStorage.setItem("todos", JSON.stringify([...otherTodos, newTodo]));
   };
 
   const updateTodo = async (todo) => {
-    console.log(todo);
-    const newTodo = await todos.find((item) => {
+    const updatedTodo = await todos.find((item) => {
       if (todo.id === item.id) {
-        item.completed = todo.completed;
         item.pinned = todo.pinned;
         item.description = todo.description;
         return item;
       }
     });
     const otherTodos = await todos.filter((item) => todo.id !== item.id);
-    console.log(newTodo);
-    // setTodos([...newTodos]);
-    // localStorage.setItem("todos", JSON.stringify([...newTodos]));
+    setTodos(sortByString([...otherTodos, updatedTodo]));
+    localStorage.setItem("todos", JSON.stringify([...otherTodos, updatedTodo]));
   };
 
   const deleteTodo = async (deleteId) => {

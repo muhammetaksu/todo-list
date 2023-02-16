@@ -1,13 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap'); */
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-}
-
-.layout {
-    background: linear-gradient(116.82deg, #85A1BA 0%, #194591 65.92%);
+    letter-spacing: -0.015em;
+    /* font-family: 'Inter', sans-serif; */
 }
