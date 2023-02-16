@@ -48,7 +48,10 @@ const TodoList = () => {
             <div className="flex ">
               <Pin />
               <p
-                className={`w-24 h-5 not-italic font-normal text-sm leading-5 text-red-500 mx-3`}
+                style={{
+                  color: "rgba(255, 121, 100, 1)",
+                }}
+                className={`w-24 h-5 not-italic font-normal text-sm leading-5 mx-3`}
               >
                 Pin on the top
               </p>

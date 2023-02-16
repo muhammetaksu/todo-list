@@ -128,11 +128,11 @@ const TodoModal = (props: Props) => {
                 </div>
               </div>
 
-              {focusInput && (
+              {/* {focusInput && (
                 <div className="absolute bottom-0 left-0 right-0">
                   <Keyboard />
                 </div>
-              )}
+              )} */}
             </div>
           </Sheet.Content>
         </Sheet.Container>

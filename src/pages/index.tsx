@@ -16,7 +16,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.container} h-screen max-w-full`}>
+      <main
+        style={{
+          background: "linear-gradient(116.82deg, #85A1BA 0%, #194591 65.92%)",
+        }}
+        className={`${styles.container} h-screen max-w-full`}
+      >
         {/* <StatusBar /> */}
         <Logo />
         <TodoList />
