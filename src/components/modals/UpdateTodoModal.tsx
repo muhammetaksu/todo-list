@@ -13,16 +13,14 @@ const UpdateTodoModal = () => {
   const { updateTodoModal, setUpdateTodoModal, selectedTodo, setSelectedTodo } =
     useModalContext();
   const { updateTodo } = useTodoContext();
-  const [isChecked, setIsChecked] = useState<boolean>(selectedTodo.pinned);
-  const [description, setDescription] = useState<string>(
-    selectedTodo.description
-  );
+  const [isChecked, setIsChecked] = useState<boolean>();
+  const [description, setDescription] = useState<string>();
   const [focusInput, setFocusInput] = useState(false);
 
   useEffect(() => {
     setIsChecked(selectedTodo.pinned);
     setDescription(selectedTodo.description);
-  }, [selectedTodo]);
+  }, [selectedTodo, selectedTodo.pinned]);
 
   const closeModal = () => {
     setDescription("");
