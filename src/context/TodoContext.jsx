@@ -17,8 +17,8 @@ export const TodoContextProvider = ({ children }) => {
   }, []);
 
   const saveTodo = async (todo) => {
-    localStorage.setItem("todos", JSON.stringify([...todos, todo]));
     setTodos(sortByString([...todos, todo]));
+    localStorage.setItem("todos", JSON.stringify([...todos, todo]));
   };
 
   const completeTodo = async (id) => {
@@ -41,6 +41,7 @@ export const TodoContextProvider = ({ children }) => {
       }
     });
     const otherTodos = await todos.filter((todo) => todo.id !== id);
+    setTodos(sortByString([...otherTodos, newTodo]));
     localStorage.setItem("todos", JSON.stringify([...otherTodos, newTodo]));
   };
 
