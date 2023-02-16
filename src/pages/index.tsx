@@ -26,10 +26,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Todo List</title>
-        <meta name="description" content="Westerops todo list homepage" />
+        <title>To Do List</title>
+        <meta name="description" content="Westerops to do list homepage" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="images/westerops-small-logo.png" />
       </Head>
       <main
         style={{
@@ -41,6 +41,7 @@ export default function Home() {
         <Logo />
         <TodoList />
       </main>
+      {/* MODALS */}
       <TodoModal />
       <TodoMenuModal />
       <UpdateTodoModal />

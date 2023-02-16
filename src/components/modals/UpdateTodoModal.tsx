@@ -18,7 +18,6 @@ const UpdateTodoModal = () => {
     selectedTodo.description
   );
   const [focusInput, setFocusInput] = useState(false);
-  console.log(selectedTodo);
 
   useEffect(() => {
     setIsChecked(selectedTodo.pinned);

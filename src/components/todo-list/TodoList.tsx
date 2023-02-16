@@ -34,7 +34,7 @@ const TodoList = () => {
           </div>
 
           <div className="mb-4 mx-4 flex flex-col">
-            <div className="flex ">
+            <div className="flex items-center">
               <Pin />
               <p
                 style={{
