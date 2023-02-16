@@ -96,9 +96,10 @@ const TodoModal = (props: Props) => {
 
               <div
                 style={
-                  focusInput
-                    ? { top: "calc(30% - 22px/2 + 63px)" }
-                    : { bottom: "0" }
+                  // focusInput
+                  //   ? { top: "calc(30% - 22px/2 + 63px)" }
+                  //   :
+                  { bottom: "0" }
                 }
                 className={`mx-8 absolute left-0 right-0`}
               >
@@ -106,7 +107,6 @@ const TodoModal = (props: Props) => {
                   disabled={!description}
                   style={{
                     letterSpacing: "-0.015em",
-                    zIndex: "123",
                     background: !description
                       ? "rgba(33, 167, 249, 0.6)"
                       : "#21A7F9",
