@@ -6,21 +6,9 @@ import dynamic from "next/dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const UpdateTodoModal = dynamic(
-  () => import("../components/modals/UpdateTodoModal"),
-  {
-    ssr: false,
-  }
-);
-const TodoModal = dynamic(() => import("../components/modals/TodoModal"), {
+const AllModals = dynamic(() => import("../components/modals/index"), {
   ssr: false,
 });
-const TodoMenuModal = dynamic(
-  () => import("../components/modals/TodoMenuModal"),
-  {
-    ssr: false,
-  }
-);
 
 export default function Home() {
   return (
@@ -42,9 +30,7 @@ export default function Home() {
         <TodoList />
       </main>
       {/* MODALS */}
-      <TodoModal />
-      <TodoMenuModal />
-      <UpdateTodoModal />
+      <AllModals />
     </>
   );
 }

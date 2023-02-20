@@ -124,7 +124,7 @@ const TodoModal = () => {
             </div>
           </Sheet.Content>
         </Sheet.Container>
-        <Sheet.Backdrop />
+        <Sheet.Backdrop onTap={() => setAddTodoModal(false)} />
       </Sheet>
     </>
   );
